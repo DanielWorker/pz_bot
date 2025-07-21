@@ -47,12 +47,13 @@ async def run_bot():
 
 
 async def main():
-    asyncio.create_task(run_bot())
-    while True:
-        await asyncio.sleep(1000)
+    await client.start(bot_token=TOKEN)
+    logger.info('Bot started')
+    await client.run_until_disconnected()
 
 
-try:
-    asyncio.run(main())
-except KeyboardInterrupt:
-    logger.warning("KeyboardInterrupt exception caught")
+if __name__ == '__main__':
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.warning("KeyboardInterrupt exception caught")
