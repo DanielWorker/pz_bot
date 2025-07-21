@@ -9,8 +9,6 @@ from server_functions import get_server_status, start_server, stop_server, save_
 logger = logging.getLogger(__name__)
 
 client = TelegramClient('bot', API_ID, API_HASH, base_logger='telegram')
-client.start(bot_token=TOKEN)
-
 
 # @client.on(events.NewMessage(pattern='/status'))
 # async def status_handler(event):
@@ -38,6 +36,8 @@ async def stop_handler(event):
 
 
 async def run_bot():
+    await client.start(bot_token=TOKEN)
+    logger.info('Bot started')
     while True:
         try:
             await client.run_until_disconnected()
@@ -46,14 +46,13 @@ async def run_bot():
             await asyncio.sleep(5)
 
 
-async def main():
-    await client.start(bot_token=TOKEN)
-    logger.info('Bot started')
-    await client.run_until_disconnected()
+# async def main():
+#
+#     asyncio.create_task(run_bot())
 
 
 if __name__ == '__main__':
     try:
-        asyncio.run(main())
+        asyncio.run(run_bot())
     except KeyboardInterrupt:
         logger.warning("KeyboardInterrupt exception caught")
