@@ -48,10 +48,11 @@ async def run_bot():
 
 async def main():
     asyncio.create_task(run_bot())
+    while True:
+        await asyncio.sleep(1000)
 
 
-if __name__ == '__main__':
-    try:
-        asyncio.run(run_bot())
-    except KeyboardInterrupt:
-        print("Program terminated by the user")
+try:
+    asyncio.run(main())
+except KeyboardInterrupt:
+    logger.warning("KeyboardInterrupt exception caught")
