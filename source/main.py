@@ -15,12 +15,12 @@ client = TelegramClient('bot', API_ID, API_HASH, base_logger='telegram')
 #     await event.respond(get_server_status())
 
 
-@client.on(events.NewMessage(pattern='/start'))
+@client.on(events.NewMessage(pattern='^/start$'))
 async def start_handler(event):
     await event.respond(start_message())
 
 
-@client.on(events.NewMessage(pattern='/start_server'))
+@client.on(events.NewMessage(pattern='^/start_server$'))
 async def start_handler(event):
     await event.respond(start_server())
 
