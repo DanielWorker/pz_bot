@@ -10,9 +10,10 @@ logger = logging.getLogger(__name__)
 
 client = TelegramClient('bot', API_ID, API_HASH, base_logger='telegram')
 
-# @client.on(events.NewMessage(pattern='/status'))
-# async def status_handler(event):
-#     await event.respond(get_server_status())
+
+@client.on(events.NewMessage(pattern='/status'))
+async def status_handler(event):
+    await event.respond(get_server_status())
 
 
 @client.on(events.NewMessage(pattern='^/start$', from_users=ALLOWED_USERS))

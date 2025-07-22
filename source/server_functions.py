@@ -8,7 +8,8 @@ def start_message():
     return ("Hello gamers, вот доступные команды:\n"
             "/start_server - запустить с сервер\n"
             "/stop - выключить сервер (/save тоже выполняется)\n"
-            "/save - сохранить сервер (на всякий случай)")
+            "/save - сохранить сервер (на всякий случай)\n"
+            "/status - узнать статус сервера")
 
 
 def start_server():
@@ -48,14 +49,5 @@ def get_server_status():
     screen_output = os.popen(f'screen -ls | grep {SCREEN_NAME}').read()
     if not screen_output:
         return '🔴 Сервер выключен'
-
-    # Проверка: в логах есть фраза запуска?
-    try:
-        with open(LOG_PATH, 'r', encoding='utf-8') as f:
-            lines = f.readlines()[-100:]  # последние строки
-            for line in reversed(lines):
-                if 'DISCORD DISABLED' in line:
-                    return '🟢 Сервер запущен'
-        return '🟡 Сервер запускается'
-    except FileNotFoundError:
-        return '⚠️ Логи не найдены'
+    else:
+        return '🟢 Сервер запущен'
